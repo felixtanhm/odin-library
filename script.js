@@ -14,4 +14,23 @@ function handleDelete() {
 
 function toggleModal() {
   // Function to handle modal display
+  console.log("yay");
+  if (toggleModal.display) {
+    console.log("remove hidden");
+    toggleModal.modalElements.forEach((element) => {
+      element.classList.add("hidden");
+    });
+  } else {
+    console.log("add hidden");
+    toggleModal.modalElements.forEach((element) => {
+      element.classList.remove("hidden");
+    });
+  }
 }
+
+toggleModal.modalElements = document.querySelectorAll(".modal");
+toggleModal.display = false;
+
+document
+  .querySelector("#add-new-button")
+  .addEventListener("click", toggleModal);

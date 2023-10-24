@@ -2,24 +2,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" src="style.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Odin Library</title>
   </head>
   <body>
-    <header></header>
+    <header>
+      <h1>Odin Library</h1>
+      <button id="add-new-button">Add New Book</button>
+    </header>
     <main>
       <div id="card-container">
         <div>
           <h3>Title</h3>
           <p>Description</p>
           <div>
-            <button>Mark Read</button>
             <button>Delete</button>
+            <button>Mark Read</button>
           </div>
         </div>
       </div>
-      <div id="add-new-modal" class="modal"></div>
-      <div class="overlay modal"></div>
+      <div id="add-new-modal" class="modal hidden">
+        <label for="book-title">Title</label>
+        <input type="text" id="book-title" />
+        <label for="book-desc">Description</label>
+        <input type="text" id="book-desc" />
+      </div>
+      <div class="overlay modal hidden"></div>
     </main>
     <script src="script.js"></script>
   </body>
