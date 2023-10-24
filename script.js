@@ -14,14 +14,13 @@ function handleDelete() {
 
 function toggleModal() {
   // Function to handle modal display
-  console.log("yay");
   if (toggleModal.display) {
-    console.log("remove hidden");
+    toggleModal.display = !toggleModal.display;
     toggleModal.modalElements.forEach((element) => {
       element.classList.add("hidden");
     });
   } else {
-    console.log("add hidden");
+    toggleModal.display = !toggleModal.display;
     toggleModal.modalElements.forEach((element) => {
       element.classList.remove("hidden");
     });
@@ -31,6 +30,6 @@ function toggleModal() {
 toggleModal.modalElements = document.querySelectorAll(".modal");
 toggleModal.display = false;
 
-document
-  .querySelector("#add-new-button")
-  .addEventListener("click", toggleModal);
+document.querySelectorAll(".modal-toggle").forEach((element) => {
+  element.addEventListener("click", toggleModal);
+});
