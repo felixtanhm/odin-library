@@ -32,23 +32,7 @@ main {
   width: 100%;
 }
 
-section.modal {
-  border-radius: 15px;
-}
-
-.modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 8px;
-  width: 480px;
-  padding: 20px;
-  position: absolute;
-  top: 20%;
-  background-color: white;
-  border: 1px solid #ddd;
-  z-index: 2;
-}
+/* Modal Elements */
 
 .overlay {
   position: fixed;
@@ -64,6 +48,21 @@ section.modal {
   cursor: pointer;
 }
 
+.modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 20%;
+  gap: 8px;
+  width: 480px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  z-index: 2;
+}
+
 .modal .header {
   display: flex;
   align-items: center;
@@ -77,20 +76,23 @@ section.modal {
 }
 
 .modal input {
-  padding: 0.7rem 1rem;
+  padding: 0.6rem;
   border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 0.9em;
+  border-radius: 4px;
+  font-size: 1rem;
   margin-bottom: 12px;
 }
 
-button {
+.hidden {
+  display: none;
+}
+
+/* Buttons */
+
+.btn {
   cursor: pointer;
   border: none;
   font-weight: 600;
-}
-
-.btn {
   display: inline-block;
   padding: 0.8rem 1.4rem;
   font-weight: 700;
@@ -101,12 +103,8 @@ button {
   font-size: 1em;
 }
 
-.close {
+.btn-close {
   padding: 8px 12px;
   background: #00000020;
   border-radius: 50%;
-}
-
-.hidden {
-  display: none;
 }

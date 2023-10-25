@@ -1,7 +1,10 @@
+const bookArr = [];
+
 function renderCard() {
   // Generate the HTML for a single card
   // Attach it to the card containers
   // Add event listeners to the buttons
+  document.createElement("div");
 }
 
 function handleRead() {
@@ -27,7 +30,7 @@ function toggleModal() {
   }
 }
 
-toggleModal.modalElements = document.querySelectorAll(".modal");
+toggleModal.modalElements = document.querySelectorAll(".hidden");
 toggleModal.display = false;
 
 document.querySelectorAll(".modal-toggle").forEach((element) => {
