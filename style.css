@@ -87,6 +87,14 @@ main {
   display: none;
 }
 
+/* Card Buttons */
+.card-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 /* Buttons */
 
 .btn {
@@ -107,4 +115,16 @@ main {
   padding: 8px 12px;
   background: #00000020;
   border-radius: 50%;
+}
+
+.btn-read {
+  min-width: 148px;
+}
+
+.btn-delete {
+  background-color: #80000080;
+}
+
+.btn-delete:hover {
+  background-color: #800000;
 }
