@@ -1,15 +1,13 @@
-const bookArr = [];
-const bookContainer = document.querySelector("#card-container");
+const bookContainer = document.getElementById("card-container");
+const addBookForm = document.getElementById("new-book-form");
+addBookForm.addEventListener("submit", handleSubmit);
 
 toggleModal.modalElements = document.querySelectorAll(".hidden");
+toggleModal.modalControllers = document.querySelectorAll(".modal-toggle");
 toggleModal.display = false;
-
-document.querySelectorAll(".modal-toggle").forEach((element) => {
+toggleModal.modalControllers.forEach((element) => {
   element.addEventListener("click", toggleModal);
 });
-document
-  .querySelector("#new-book-form")
-  .addEventListener("submit", handleSubmit);
 
 class Book {
   constructor(title, description, isRead) {
@@ -28,21 +26,24 @@ function renderCard(cardObj) {
   let newCard = document.createElement("div");
   let title = document.createElement("h3");
   let description = document.createElement("p");
+  let status = document.createElement("p");
   let buttonDiv = document.createElement("div");
   let deleteBtn = document.createElement("button");
   let readBtn = document.createElement("button");
 
   // Update element contents
-  newCard.setAttribute("data-bookId", bookArr.length);
   title.innerText = cardObj.title;
   description.innerText = cardObj.description;
+  status.innerText = `Status: ${cardObj.isRead ? "Read" : "Unread"}`;
   deleteBtn.innerText = "Delete";
   readBtn.innerText = cardObj.isRead ? "Mark Unread" : "Mark Read";
 
   // Update element classes
+  status.classList.add("status");
   buttonDiv.classList.add("card-btns");
   deleteBtn.classList.add("btn", "btn-delete");
   readBtn.classList.add("btn", "btn-read");
+  readBtn.setAttribute("value", "read");
 
   // Add event listeners
   deleteBtn.addEventListener("click", handleDelete);
@@ -54,6 +55,7 @@ function renderCard(cardObj) {
 
   newCard.appendChild(title);
   newCard.appendChild(description);
+  newCard.appendChild(status);
   newCard.appendChild(buttonDiv);
 
   bookContainer.appendChild(newCard);
@@ -61,12 +63,20 @@ function renderCard(cardObj) {
 
 function createNewBook(title, description) {
   let newBook = new Book(title, description);
-  bookArr.push(newBook);
   renderCard(newBook);
 }
 
-function handleRead() {
-  // Function to handle card being marked as Read
+function handleRead(e) {
+  let readBtn = e.target;
+  let bookCard = e.target.parentElement.parentElement;
+  let statusText = bookCard.querySelector(".status");
+  statusText.innerText = `Status: ${
+    readBtn.value == "read" ? "Read" : "Unread"
+  }`;
+  readBtn.innerText = `${
+    readBtn.value == "read" ? "Mark Unread" : "Mark Read"
+  }`;
+  readBtn.setAttribute("value", readBtn.value == "read" ? " unread" : "read");
 }
 
 function handleDelete() {
@@ -79,10 +89,10 @@ function handleSubmit(event) {
   let description = document.getElementById("book-desc").value;
   createNewBook(title, description);
   toggleModal();
+  addBookForm.reset();
 }
 
 function toggleModal() {
-  // Function to handle modal display
   if (toggleModal.display) {
     toggleModal.display = !toggleModal.display;
     toggleModal.modalElements.forEach((element) => {
