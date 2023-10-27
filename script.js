@@ -1,6 +1,5 @@
 const bookArr = [];
 const bookContainer = document.querySelector("#card-container");
-console.log(bookContainer);
 
 toggleModal.modalElements = document.querySelectorAll(".hidden");
 toggleModal.display = false;
@@ -8,11 +7,23 @@ toggleModal.display = false;
 document.querySelectorAll(".modal-toggle").forEach((element) => {
   element.addEventListener("click", toggleModal);
 });
+document
+  .querySelector("#new-book-form")
+  .addEventListener("submit", handleSubmit);
+
+class Book {
+  constructor(title, description, isRead) {
+    (this.title = title),
+      (this.description = description),
+      (this.isRead = false);
+  }
+
+  markRead() {
+    this.isRead = !this.isRead;
+  }
+}
 
 function renderCard(cardObj) {
-  // Generate the HTML for a single card
-  // Attach it to the card containers
-
   // Construct Elements
   let newCard = document.createElement("div");
   let title = document.createElement("h3");
@@ -26,7 +37,7 @@ function renderCard(cardObj) {
   title.innerText = cardObj.title;
   description.innerText = cardObj.description;
   deleteBtn.innerText = "Delete";
-  readBtn.innerText = cardObj.read ? "Mark Unread" : "Mark Read";
+  readBtn.innerText = cardObj.isRead ? "Mark Unread" : "Mark Read";
 
   // Update element classes
   buttonDiv.classList.add("card-btns");
@@ -48,12 +59,26 @@ function renderCard(cardObj) {
   bookContainer.appendChild(newCard);
 }
 
+function createNewBook(title, description) {
+  let newBook = new Book(title, description);
+  bookArr.push(newBook);
+  renderCard(newBook);
+}
+
 function handleRead() {
   // Function to handle card being marked as Read
 }
 
 function handleDelete() {
   // Function to handle card being removed from library
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let title = document.getElementById("book-title").value;
+  let description = document.getElementById("book-desc").value;
+  createNewBook(title, description);
+  toggleModal();
 }
 
 function toggleModal() {
@@ -72,22 +97,5 @@ function toggleModal() {
 }
 
 // Hardcode initial books
-let bookObj1 = {
-  title: "Book1",
-  description: "Description1",
-  read: false,
-};
-
-let bookObj2 = {
-  title: "Book2",
-  description: "Description2",
-  read: true,
-};
-
-bookArr.push(bookObj1);
-bookArr.push(bookObj2);
-
-bookArr.forEach((bookObj) => {
-  renderCard(bookObj);
-  console.log("book!");
-});
+createNewBook("Test3", "Desc1", true);
+createNewBook("Test2", "Desc2", false);
