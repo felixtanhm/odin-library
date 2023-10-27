@@ -66,9 +66,9 @@ function createNewBook(title, description) {
   renderCard(newBook);
 }
 
-function handleRead(e) {
-  let readBtn = e.target;
-  let bookCard = e.target.parentElement.parentElement;
+function handleRead(event) {
+  let readBtn = event.target;
+  let bookCard = event.target.parentElement.parentElement;
   let statusText = bookCard.querySelector(".status");
   statusText.innerText = `Status: ${
     readBtn.value == "read" ? "Read" : "Unread"
@@ -79,8 +79,11 @@ function handleRead(e) {
   readBtn.setAttribute("value", readBtn.value == "read" ? " unread" : "read");
 }
 
-function handleDelete() {
+function handleDelete(event) {
   // Function to handle card being removed from library
+  let delBtn = event.target;
+  let bookCard = event.target.parentElement.parentElement;
+  bookCard.remove();
 }
 
 function handleSubmit(event) {
