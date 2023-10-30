@@ -10,18 +10,26 @@ toggleModal.modalControllers.forEach((element) => {
 });
 
 class Book {
-  constructor(title, description, isRead) {
+  constructor(title, description) {
     (this.title = title),
       (this.description = description),
       (this.isRead = false);
   }
-
-  markRead() {
-    this.isRead = !this.isRead;
-  }
 }
 
 function renderCard(cardObj) {
+  const markRead = () => {
+    status.innerText = `Status: ${readBtn.value == "read" ? "Read" : "Unread"}`;
+    readBtn.innerText = `${
+      readBtn.value == "read" ? "Mark Unread" : "Mark Read"
+    }`;
+    readBtn.setAttribute("value", readBtn.value == "read" ? " unread" : "read");
+  };
+
+  const delCard = () => {
+    newCard.remove();
+  };
+
   // Construct Elements
   let newCard = document.createElement("div");
   let title = document.createElement("h3");
@@ -46,8 +54,8 @@ function renderCard(cardObj) {
   readBtn.setAttribute("value", "read");
 
   // Add event listeners
-  deleteBtn.addEventListener("click", handleDelete);
-  readBtn.addEventListener("click", handleRead);
+  deleteBtn.addEventListener("click", delCard);
+  readBtn.addEventListener("click", markRead);
 
   // Piece elements together
   buttonDiv.appendChild(deleteBtn);
@@ -64,26 +72,6 @@ function renderCard(cardObj) {
 function createNewBook(title, description) {
   let newBook = new Book(title, description);
   renderCard(newBook);
-}
-
-function handleRead(event) {
-  let readBtn = event.target;
-  let bookCard = event.target.parentElement.parentElement;
-  let statusText = bookCard.querySelector(".status");
-  statusText.innerText = `Status: ${
-    readBtn.value == "read" ? "Read" : "Unread"
-  }`;
-  readBtn.innerText = `${
-    readBtn.value == "read" ? "Mark Unread" : "Mark Read"
-  }`;
-  readBtn.setAttribute("value", readBtn.value == "read" ? " unread" : "read");
-}
-
-function handleDelete(event) {
-  // Function to handle card being removed from library
-  let delBtn = event.target;
-  let bookCard = event.target.parentElement.parentElement;
-  bookCard.remove();
 }
 
 function handleSubmit(event) {
